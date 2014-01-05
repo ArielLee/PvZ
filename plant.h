@@ -11,7 +11,7 @@
 class Plant {
 public:
 	Plant(char type, std::string name, int cost, int life) : type_(type), name_(name), cost_(cost), life_(life) {
-
+        static_life_ = life_;
 	}
 
 	virtual ~Plant() = default;
@@ -42,6 +42,11 @@ public:
 
 	void Recover(int heal_points) {
 		life_ += heal_points;
+
+		if(life_ > static_life_)
+        {
+            life_ = static_life_;
+        }
 	}
 
 	void SetPosition(size_t pos) {
@@ -75,6 +80,7 @@ private:
 	std::string name_;
 	int cost_;
 	int life_;
+	int static_life_;
 	size_t position_;
 };
 
