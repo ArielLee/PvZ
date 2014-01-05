@@ -37,13 +37,14 @@ int getNumber(int lb, int ub, int default_val) {
 
 	int n = atoi(buf);
 
-	return n >= lb && n <= ub ? n : default_val;
+	return isdigit(buf[0]) ? (n >= lb && n <= ub ? n : default_val) : default_val;
 }
 
 int move(int lb, int ub, int curr_pos, int max_dist) {
-	curr_pos += (rand()%2 ? 1 : -1) * (rand() % max_dist + 1);
+	//curr_pos += (rand()%2 ? 1 : -1) * (rand() % max_dist + 1);
+	curr_pos = (curr_pos + rand() % max_dist) % max_dist;
 
-	return curr_pos < lb ? lb : curr_pos > ub ? ub : curr_pos;
+	return (curr_pos < lb ? lb : (curr_pos > ub ? ub : curr_pos));
 }
 
 void ShowInformation(ostream& os, const Map& map, const Player& player, const vector<Zombie>& zombies) {
@@ -204,6 +205,7 @@ int main() {
 
 					if (!zombie.Alive()) {
                         cout << "Zombie is killed!" << endl;
+                        zombies.erase(zombies.begin() + (turn - 1));
 
 						alive_zombies_cnt -= 1;
 					}

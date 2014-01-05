@@ -26,12 +26,13 @@ public:
 	}
 
 	std::string ActWith(Zombie& zombie) override {
-		zombie.Injured(Life());
+	    zombie.Injured(damage_);
 
-		Injured(Life());
+		Injured(damage_);
 
 		std::stringstream ss;
-		ss << Name() << " gives " << Life() << " damage to the zombie!";
+		ss << Name() << " gives " << damage_ << " damage to the zombie!";
+
 		return ss.str();
 	}
 
