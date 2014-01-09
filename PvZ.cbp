@@ -32,7 +32,9 @@
 			<Add option="-Wall" />
 			<Add option="-fexceptions" />
 		</Compiler>
+		<Unit filename="bombplant.cpp" />
 		<Unit filename="bombplant.h" />
+		<Unit filename="coinplant.cpp" />
 		<Unit filename="coinplant.h" />
 		<Unit filename="healplant.h" />
 		<Unit filename="land.h" />

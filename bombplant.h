@@ -1,10 +1,6 @@
 #ifndef BOMBPLANT_H
 #define BOMBPLANT_H
 
-#include <sstream>
-#include <string>
-
-#include "plant.h"
 
 class BombPlant : public Plant {
 public:
@@ -12,31 +8,13 @@ public:
 
 	}
 
-	Plant *Clone() const override {
+	virtual Plant *Clone() const override {
 		return new BombPlant(Type(), Name(), Cost(), Life());
 	}
 
-	void ShowDetailsAndEffects(std::ostream& os) const override {
-		os << Name() << " $" << Cost() << " HP: " << Life()
-		   << " - gives " << damage_ << " damage points";
-	}
-
-	void Print(std::ostream& os) const override {
-		os << Name() << " HP: " << Life();
-	}
-
-	std::string ActWith(Zombie& zombie) override {
-	    damage_ = Life();
-
-	    zombie.Injured(damage_);
-
-		Injured(damage_);
-
-		std::stringstream ss;
-		ss << Name() << " gives " << damage_ << " damage to the zombie!";
-
-		return ss.str();
-	}
+	virtual void ShowDetailsAndEffects(std::ostream& os) const override;
+	virtual void Print(std::ostream& os) const override;
+	virtual std::string ActWith(Zombie& zombie) override;
 
 private:
 	int damage_;
