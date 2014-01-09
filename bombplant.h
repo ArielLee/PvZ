@@ -26,6 +26,8 @@ public:
 	}
 
 	std::string ActWith(Zombie& zombie) override {
+	    damage_ = Life();
+
 	    zombie.Injured(damage_);
 
 		Injured(damage_);

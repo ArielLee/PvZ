@@ -32,7 +32,17 @@
 			<Add option="-Wall" />
 			<Add option="-fexceptions" />
 		</Compiler>
+		<Unit filename="bombplant.h" />
+		<Unit filename="coinplant.h" />
+		<Unit filename="healplant.h" />
+		<Unit filename="land.h" />
 		<Unit filename="main.cpp" />
+		<Unit filename="map.h" />
+		<Unit filename="movable.h" />
+		<Unit filename="plant.h" />
+		<Unit filename="player.h" />
+		<Unit filename="shootplant.h" />
+		<Unit filename="zombie.h" />
 		<Extensions>
 			<code_completion />
 			<envvars />

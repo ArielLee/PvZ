@@ -42,9 +42,9 @@ int getNumber(int lb, int ub, int default_val) {
 
 int move(int lb, int ub, int curr_pos, int max_dist) {
 	//curr_pos += (rand()%2 ? 1 : -1) * (rand() % max_dist + 1);
-	curr_pos = (curr_pos + rand() % max_dist) % max_dist;
+	curr_pos = (curr_pos + (rand() % max_dist)) % ub;
 
-	return (curr_pos < lb ? lb : (curr_pos > ub ? ub : curr_pos));
+	return curr_pos; //(curr_pos < lb ? lb : (curr_pos > ub ? ub : curr_pos));
 }
 
 void ShowInformation(ostream& os, const Map& map, const Player& player, const vector<Zombie>& zombies) {
@@ -57,7 +57,7 @@ void ShowInformation(ostream& os, const Map& map, const Player& player, const ve
 		os << zombies[i] << endl;
 	}
 
-	cout << "================================================" << endl;
+	os << "================================================" << endl;
 }
 
 int main() {
@@ -140,7 +140,7 @@ int main() {
 		system("cls");
 
 		if (turn == 0) { // player
-			player.UpdatePos(move(0, num_lands - 1, player.Position(), player.MaxMoveDist()));
+			player.UpdatePos(move(0, num_lands, player.Position(), player.MaxMoveDist()));
 
 			ShowInformation(cout, map, player, zombies);
 
@@ -185,7 +185,7 @@ int main() {
 			Zombie& zombie = zombies[turn - 1];
 
 			if (zombie.Alive()) {
-				zombie.UpdatePos(move(0, num_lands - 1, zombie.Position(), zombie.MaxMoveDist()));
+				zombie.UpdatePos(move(0, num_lands, zombie.Position(), zombie.MaxMoveDist()));
 
 				ShowInformation(cout, map, player, zombies);
 
@@ -218,7 +218,7 @@ int main() {
 						}
 
 						plants.erase(std::remove(plants.begin(), plants.end(), plant), plants.end());
-						map[zombie.Position()].Clear();
+						map[plant->Position()].Clear();
 					}
 				}
 			}
@@ -249,6 +249,13 @@ int main() {
 
 		system("pause");
 	} while (status == TGameStatus::PLAYING);
+
+	for(int i = 0, j = plant_factory.size(); i < j; i ++)
+    {
+        Plant *p = plant_factory.at(i);
+        delete p;
+    }
+    plant_factory.clear();
 
 	return 0;
 }
